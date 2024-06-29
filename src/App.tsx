@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { AlertTriangle, DollarSign, TrendingUp } from 'lucide-react';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import MaterialManagement from './components/MaterialManagement';
+import PriceAnalysis from './components/PriceAnalysis';
+import ScenarioAnalysis from './components/ScenarioAnalysis';
+import Reports from './components/Reports';
+import AlertSettings from './components/AlertSettings';
+import SupplierPerformance from './components/SupplierPerformance';
 
-function App() {
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-100">
+        <Switch>
+          <Route exact path="/">
+            {isLoggedIn ? <Redirect to="/dashboard" /> : <Login onLogin={handleLogin} />}
+          </Route>
+          <Route path="/dashboard">
+            {isLoggedIn ? <Dashboard /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/materials">
+            {isLoggedIn ? <MaterialManagement /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/price-analysis">
+            {isLoggedIn ? <PriceAnalysis /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/scenario-analysis">
+            {isLoggedIn ? <ScenarioAnalysis /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/reports">
+            {isLoggedIn ? <Reports /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/alerts">
+            {isLoggedIn ? <AlertSettings /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/supplier-performance">
+            {isLoggedIn ? <SupplierPerformance /> : <Redirect to="/" />}
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
