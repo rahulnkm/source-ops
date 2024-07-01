@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { AlertTriangle, DollarSign, TrendingUp } from 'lucide-react';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
@@ -20,7 +20,11 @@ const App = () => {
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
-        <Switch>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+
+
           <Route exact path="/">
             {isLoggedIn ? <Redirect to="/dashboard" /> : <Login onLogin={handleLogin} />}
           </Route>
