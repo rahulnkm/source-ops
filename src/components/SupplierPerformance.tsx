@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../@/components/ui/table';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../@/components/ui/select';
+import { Card, CardHeader, CardContent } from '../components/@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/@/components/ui/table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/@/components/ui/select';
 import { StarIcon } from 'lucide-react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 

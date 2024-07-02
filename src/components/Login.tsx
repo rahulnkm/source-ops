@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardFooter } from '../../@/components/ui/card';
-import { Input } from '../../@/components/ui/input';
-import { Button } from '../../@/components/ui/button';
+import { Card, CardHeader, CardContent, CardFooter } from '../components/@/components/ui/card';
+import { Input } from '../components/@/components/ui/input';
+import { Button } from '../components/@/components/ui/button';
 
 const Login = ({ onLogin }: { onLogin: () => void }) => {
   const [username, setUsername] = useState('');

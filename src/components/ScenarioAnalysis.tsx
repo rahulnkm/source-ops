@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
-import { Input } from '../../@/components/ui/input';
-import { Button } from '../../@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../@/components/ui/table';
+import { Card, CardHeader, CardContent } from '../components/@/components/ui/card';
+import { Input } from '../components/@/components/ui/input';
+import { Button } from '../components/@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/@/components/ui/table';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Mock data for demonstration
@@ -36,14 +36,14 @@ const ScenarioAnalysis = () => {
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, materialId: number) => {
-    const { name, value } = e.target;
-    setNewScenario(prev => ({
-      ...prev,
-      materials: prev.materials.map(m =>
-        m.id === materialId ? { ...m, [name]: parseFloat(value) || 0 } : m
-      )
-    }));
-  };
+     const { name, value } = e.target;
+     setNewScenario(prev => ({
+       ...prev,
+       materials: prev.materials.map(m =>
+         m.id === materialId ? { ...m, [name]: parseFloat(value) || 0 } : m
+       )
+     }));
+   };
 
   const handleScenarioNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewScenario(prev => ({ ...prev, name: e.target.value }));

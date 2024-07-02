@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
-import { Input } from '../../@/components/ui/input';
-import { Button } from '../../@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../@/components/ui/table';
+import { Card, CardHeader, CardContent } from '../components/@/components/ui/card';
+import { Input } from '../components/@/components/ui/input';
+import { Button } from '../components/@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/@/components/ui/table';
 import { Pencil, Trash2 } from 'lucide-react';
 
 type Material = {
