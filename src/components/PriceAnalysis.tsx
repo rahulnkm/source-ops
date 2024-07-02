@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../@/components/ui/select';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Mock data for demonstration
@@ -10,7 +10,7 @@ const mockMaterials = [
   { id: 3, name: 'Copper' },
 ];
 
-const mockPriceData = {
+const mockPriceData: { [key: number]: { date: string; price: number }[] } = {
   1: [
     { date: '2023-01', price: 100 },
     { date: '2023-02', price: 105 },
@@ -40,7 +40,7 @@ const mockPriceData = {
 const PriceAnalysis = () => {
   const [selectedMaterial, setSelectedMaterial] = useState(mockMaterials[0].id);
 
-  const handleMaterialChange = (value) => {
+  const handleMaterialChange = (value: string) => {
     setSelectedMaterial(Number(value));
   };
 

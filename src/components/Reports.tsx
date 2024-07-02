@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../@/components/ui/select';
+import { Button } from '../../@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../@/components/ui/table';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Mock data for demonstration
-const mockReportData = {
+const mockReportData: { [key: string]: { category: string; amount: number }[] } = {
   savings: [
     { category: 'Raw Materials', amount: 50000 },
     { category: 'Packaging', amount: 30000 },
@@ -26,12 +26,13 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const Reports = () => {
   const [reportType, setReportType] = useState('savings');
 
-  const handleReportTypeChange = (value) => {
+  const handleReportTypeChange = (value: string) => {
     setReportType(value);
   };
 
   const data = mockReportData[reportType];
-  const total = data.reduce((sum, item) => sum + item.amount, 0);
+  const total = data.reduce((sum: number, item: { amount: number }) => sum + item.amount, 0);
+
 
   return (
     <div className="container mx-auto p-4">
@@ -88,8 +89,9 @@ const Reports = () => {
                       dataKey="amount"
                     >
                       {data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}
+                      />
+))}
                     </Pie>
                     <Tooltip />
                     <Legend />
@@ -107,13 +109,12 @@ const Reports = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell>{item.category}</TableCell>
-                  <TableCell>${item.amount.toLocaleString()}</TableCell>
-                  <TableCell>{((item.amount / total) * 100).toFixed(2)}%</TableCell>
-                </TableRow>
-              ))}
+            {data.map((item, index) => (
+              <TableRow key={index}>
+                <TableCell>{item.category}</TableCell>
+                <TableCell>${item.amount.toLocaleString()}</TableCell>
+              </TableRow>
+            ))}
               <TableRow>
                 <TableCell className="font-bold">Total</TableCell>
                 <TableCell className="font-bold">${total.toLocaleString()}</TableCell>

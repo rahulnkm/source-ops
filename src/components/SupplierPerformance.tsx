@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../@/components/ui/table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../@/components/ui/select';
 import { StarIcon } from 'lucide-react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 
@@ -45,11 +45,14 @@ const mockSuppliers = [
 const SupplierPerformance = () => {
   const [selectedSupplier, setSelectedSupplier] = useState(mockSuppliers[0]);
 
-  const handleSupplierChange = (value) => {
-    setSelectedSupplier(mockSuppliers.find(s => s.id === parseInt(value)));
+  const handleSupplierChange = (value: string) => {
+    const supplier = mockSuppliers.find(s => s.id === parseInt(value));
+    if (supplier) {
+      setSelectedSupplier(supplier);
+    }
   };
 
-  const renderStarRating = (rating) => {
+  const renderStarRating = (rating: number) => {
     return [...Array(5)].map((_, index) => (
       <StarIcon 
         key={index} 

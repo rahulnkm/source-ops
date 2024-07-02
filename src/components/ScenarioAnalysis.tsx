@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Card, CardHeader, CardContent } from '../../@/components/ui/card';
+import { Input } from '../../@/components/ui/input';
+import { Button } from '../../@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../@/components/ui/table';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Mock data for demonstration
@@ -12,14 +12,30 @@ const mockMaterials = [
   { id: 3, name: 'Copper', currentPrice: 150, currentQuantity: 500 },
 ];
 
+type Material = {
+  id: number;
+  name: string;
+  currentPrice: number;
+  currentQuantity: number;
+  newPrice: number;
+  newQuantity: number;
+};
+
+type Scenario = {
+  name: string;
+  materials: Material[];
+  totalCostChange: number;
+};
+
+
 const ScenarioAnalysis = () => {
-  const [scenarios, setScenarios] = useState([]);
-  const [newScenario, setNewScenario] = useState({
+  const [scenarios, setScenarios] = useState<Scenario[]>([]);
+  const [newScenario, setNewScenario] = useState<Omit<Scenario, 'totalCostChange'>>({
     name: '',
     materials: mockMaterials.map(m => ({ ...m, newPrice: m.currentPrice, newQuantity: m.currentQuantity }))
   });
 
-  const handleInputChange = (e, materialId) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, materialId: number) => {
     const { name, value } = e.target;
     setNewScenario(prev => ({
       ...prev,
@@ -29,11 +45,11 @@ const ScenarioAnalysis = () => {
     }));
   };
 
-  const handleScenarioNameChange = (e) => {
+  const handleScenarioNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewScenario(prev => ({ ...prev, name: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const totalCostChange = newScenario.materials.reduce((acc, m) => {
       const oldCost = m.currentPrice * m.currentQuantity;

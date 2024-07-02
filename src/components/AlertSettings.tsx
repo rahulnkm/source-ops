@@ -7,6 +7,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Bell, Trash2 } from 'lucide-react';
 
+type Alert = {
+  id: number;
+  type: string;
+  condition: string;
+  material: string;
+  active: boolean;
+};
+
 const AlertSettings = () => {
   const [alerts, setAlerts] = useState([
     { id: 1, type: 'Price Change', condition: '> 5%', material: 'Steel', active: true },
@@ -14,37 +22,38 @@ const AlertSettings = () => {
     { id: 3, type: 'Stock Level', condition: '< 100 units', material: 'Aluminum', active: false },
   ]);
 
-  const [newAlert, setNewAlert] = useState({
+  const [newAlert, setNewAlert] = useState<Omit<Alert, 'id'>>({
     type: '',
     condition: '',
     material: '',
     active: true,
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewAlert(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: string, value: string) => {
     setNewAlert(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSwitchChange = (id) => {
+  const handleSwitchChange = (id: number) => {
     setAlerts(alerts.map(alert => 
       alert.id === id ? { ...alert, active: !alert.active } : alert
     ));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAlerts([...alerts, { ...newAlert, id: Date.now() }]);
     setNewAlert({ type: '', condition: '', material: '', active: true });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     setAlerts(alerts.filter(alert => alert.id !== id));
   };
+
 
   return (
     <div className="container mx-auto p-4">
@@ -70,16 +79,16 @@ const AlertSettings = () => {
               </SelectContent>
             </Select>
             <Input
-              name="condition"
               placeholder="Condition (e.g., > 5%, < 100 units)"
               value={newAlert.condition}
+              name="condition"
               onChange={handleInputChange}
               required
             />
             <Input
-              name="material"
               placeholder="Material (or 'All')"
               value={newAlert.material}
+              name="material"
               onChange={handleInputChange}
               required
             />

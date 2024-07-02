@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardContent, CardFooter } from '../../@/components/ui/card';
+import { Input } from '../../@/components/ui/input';
+import { Button } from '../../@/components/ui/button';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin }: { onLogin: () => void }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add authentication logic here
     onLogin();
   };
 
