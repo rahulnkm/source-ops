@@ -3,7 +3,7 @@
 export const login = (username: string, password: string): Promise<boolean> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(username === 'admin' && password === 'password');
+        resolve(username === 'yuh' && password === 'king');
       }, 1000);
     });
   };

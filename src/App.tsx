@@ -8,6 +8,8 @@ import ScenarioAnalysis from './components/ScenarioAnalysis';
 import Reports from './components/Reports';
 import AlertSettings from './components/AlertSettings';
 import SupplierPerformance from './components/SupplierPerformance';
+import MVP from './components/MVP';
+import LandingPage from './components/LandingPage';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,7 +22,8 @@ const App = () => {
     <Router>
       <div className="min-h-screen bg-gray-100">
         <Routes>
-          <Route path="/" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/mvp" element={isLoggedIn ? <MVP /> : <Navigate to="/login" />} /> {/* Add this line */}
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
           <Route path="/materials" element={isLoggedIn ? <MaterialManagement /> : <Navigate to="/login" />} />
@@ -29,6 +32,7 @@ const App = () => {
           <Route path="/reports" element={isLoggedIn ? <Reports /> : <Navigate to="/login" />} />
           <Route path="/alert-settings" element={isLoggedIn ? <AlertSettings /> : <Navigate to="/login" />} />
           <Route path="/supplier-performance" element={isLoggedIn ? <SupplierPerformance /> : <Navigate to="/login" />} />
+          <Route path="*" element={isLoggedIn ? <SupplierPerformance /> : <Navigate to="/login" />} />
         </Routes>
       </div>
     </Router>

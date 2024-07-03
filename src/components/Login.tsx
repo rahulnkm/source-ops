@@ -2,14 +2,23 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardFooter } from '../components/@/components/ui/card';
 import { Input } from '../components/@/components/ui/input';
 import { Button } from '../components/@/components/ui/button';
+import { login } from '../api/mock';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }: { onLogin: () => void }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin();
+    const isAuthenticated = await login(username, password);
+    if (isAuthenticated) {
+        onLogin();
+        navigate('/mvp');
+    } else {
+        alert('Invalid credentials');
+    }
   };
 
   return (
