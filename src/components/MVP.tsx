@@ -10,6 +10,9 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 type DataEntry = {
+  id: number;
+  name: string;
+  value: string;
   trade_name: number;
   rm_spec_no: string;
   us_inci_name: string;
@@ -22,7 +25,19 @@ type DataEntry = {
 
 const MVP = () => {
   const [dataEntries, setDataEntries] = useState<DataEntry[]>([]);
-  const [newEntry, setNewEntry] = useState<DataEntry>({ id: 0, name: '', value: '' });
+  const [newEntry, setNewEntry] = useState<DataEntry>({
+    id: 0,
+    name: '',
+    value: '',
+    trade_name: 0,
+    rm_spec_no: '',
+    us_inci_name: '',
+    eu_inci_name: '',
+    price_variance: '',
+    lead_time: '',
+    manufacturing_site: '',
+    rm_volume: '',
+  });
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -49,13 +64,10 @@ const MVP = () => {
       const { data, error } = await supabase.from('materials').insert([{ ...newEntry, id: Date.now() }]);
       if (error) {
         console.error(error);
-      }
-      else if (data) {
+      } else if (data) {
         setDataEntries([...dataEntries, data[0]]);
       }
     }
-
-    setNewEntry({ id: 0, name: '', value: '' });
   };
 
   const handleEdit = (entry: DataEntry) => {
@@ -120,7 +132,7 @@ const MVP = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-                <TableRow>
+              <TableRow>
                 <TableCell>Material A</TableCell>
                 <TableCell>Spec001</TableCell>
                 <TableCell>INCI001</TableCell>
@@ -135,44 +147,43 @@ const MVP = () => {
                 <TableCell>Category 1</TableCell>
                 <TableCell>Manager A</TableCell>
                 <TableCell>Lead A</TableCell>
-              </TableRow>    
-              <TableRow>
-                  <TableCell>Material B</TableCell>
-                  <TableCell>Spec002</TableCell>
-                  <TableCell>INCI002</TableCell>
-                  <TableCell>EUINCI002</TableCell>
-                  <TableCell>10%</TableCell>
-                  <TableCell>15 days</TableCell>
-                  <TableCell>Site B</TableCell>
-                  <TableCell>2000</TableCell>
-                  <TableCell>$60</TableCell>
-                  <TableCell>$120000</TableCell>
-                  <TableCell>Site B</TableCell>
-                  <TableCell>Category 2</TableCell>
-                  <TableCell>Manager B</TableCell>
-                  <TableCell>Lead B</TableCell>
               </TableRow>
               <TableRow>
-                  <TableCell>Material C</TableCell>
-                  <TableCell>Spec003</TableCell>
-                  <TableCell>INCI003</TableCell>
-                  <TableCell>EUINCI003</TableCell>
-                  <TableCell>15%</TableCell>
-                  <TableCell>20 days</TableCell>
-                  <TableCell>Site C</TableCell>
-                  <TableCell>3000</TableCell>
-                  <TableCell>$70</TableCell>
-                  <TableCell>$210000</TableCell>
-                  <TableCell>Site C</TableCell>
-                  <TableCell>Category 3</TableCell>
-                  <TableCell>Manager C</TableCell>
-                  <TableCell>Lead C</TableCell>
+                <TableCell>Material B</TableCell>
+                <TableCell>Spec002</TableCell>
+                <TableCell>INCI002</TableCell>
+                <TableCell>EUINCI002</TableCell>
+                <TableCell>10%</TableCell>
+                <TableCell>15 days</TableCell>
+                <TableCell>Site B</TableCell>
+                <TableCell>2000</TableCell>
+                <TableCell>$60</TableCell>
+                <TableCell>$120000</TableCell>
+                <TableCell>Site B</TableCell>
+                <TableCell>Category 2</TableCell>
+                <TableCell>Manager B</TableCell>
+                <TableCell>Lead B</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Material C</TableCell>
+                <TableCell>Spec003</TableCell>
+                <TableCell>INCI003</TableCell>
+                <TableCell>EUINCI003</TableCell>
+                <TableCell>15%</TableCell>
+                <TableCell>20 days</TableCell>
+                <TableCell>Site C</TableCell>
+                <TableCell>3000</TableCell>
+                <TableCell>$70</TableCell>
+                <TableCell>$210000</TableCell>
+                <TableCell>Site C</TableCell>
+                <TableCell>Category 3</TableCell>
+                <TableCell>Manager C</TableCell>
+                <TableCell>Lead C</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </CardContent>
       </Card>
-
       <Card className="mb-8">
         <CardHeader>
           <h3 className="text-lg font-medium">Insights</h3>
@@ -186,11 +197,3 @@ const MVP = () => {
 };
 
 export default MVP;
-
-/*
-Create a button for users to import their materials data into a database
-Create a pretty database for their materials data
-Have an enter a new row feature (new material)
-Have an edit row feature (edit the details of a material)  
-Store this data in a persistent database (Supabase)
-*/
