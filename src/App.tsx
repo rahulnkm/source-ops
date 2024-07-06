@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import MaterialManagement from './components/MaterialManagement';
+import Materials from './components/Materials';
 import PriceAnalysis from './components/PriceAnalysis';
 import ScenarioAnalysis from './components/ScenarioAnalysis';
 import Reports from './components/Reports';
@@ -22,11 +22,11 @@ const App = () => {
     <Router>
       <div className="min-h-screen bg-gray-100">
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Materials />} />
           <Route path="/mvp" element={isLoggedIn ? <MVP /> : <Navigate to="/login" />} /> {/* Add this line */}
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
-          <Route path="/materials" element={isLoggedIn ? <MaterialManagement /> : <Navigate to="/login" />} />
+          <Route path="/materials" element={isLoggedIn ? <Materials /> : <Navigate to="/login" />} />
           <Route path="/price-analysis" element={isLoggedIn ? <PriceAnalysis /> : <Navigate to="/login" />} />
           <Route path="/scenario-analysis" element={isLoggedIn ? <ScenarioAnalysis /> : <Navigate to="/login" />} />
           <Route path="/reports" element={isLoggedIn ? <Reports /> : <Navigate to="/login" />} />

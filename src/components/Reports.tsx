@@ -8,7 +8,7 @@ import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Toolti
 // Mock data for demonstration
 const mockReportData: { [key: string]: { category: string; amount: number }[] } = {
   savings: [
-    { category: 'Raw Materials', amount: 50000 },
+    { category: 'Rawa Materials', amount: 50000 },
     { category: 'Packaging', amount: 30000 },
     { category: 'Transportation', amount: 20000 },
     { category: 'Labor', amount: 10000 },
