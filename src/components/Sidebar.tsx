@@ -8,9 +8,6 @@ const Sidebar = () => {
       <nav className="flex-1">
         <ul>
           <li className="p-4 hover:bg-gray-700">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="p-4 hover:bg-gray-700">
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li className="p-4 hover:bg-gray-700">

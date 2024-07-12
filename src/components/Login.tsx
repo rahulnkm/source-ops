@@ -15,7 +15,7 @@ const Login = ({ onLogin }: { onLogin: () => void }) => {
     const isAuthenticated = await login(username, password);
     if (isAuthenticated) {
         onLogin();
-        navigate('/mvp');
+        navigate('/dashboard');
     } else {
         alert('Invalid credentials');
     }
